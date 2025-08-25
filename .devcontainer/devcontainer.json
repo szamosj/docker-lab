@@ -1,25 +1,16 @@
 {
-  "name": "Docker & Networking Tools Lab",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
+  "name": "Docker Network Tools Test",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "features": {
-    // Enables Docker-in-Docker (provides docker & docker compose)
     "ghcr.io/devcontainers/features/docker-from-docker:1": {}
   },
   "forwardPorts": [8080],
   "customizations": {
     "vscode": {
-      "settings": {
-        "terminal.integrated.shell.linux": "/bin/bash"
-      },
       "extensions": [
-        "ms-azuretools.vscode-docker",
-        "ms-vscode.vscode-typescript-next"
+        "ms-azuretools.vscode-docker"
       ]
     }
   },
-  "remoteUser": "vscode",
-  "postCreateCommand": "echo 'Container ready for Docker lab!'"
+  "postCreateCommand": "docker --version && docker compose version"
 }
-
