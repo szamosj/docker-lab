@@ -5,7 +5,7 @@
   },
   "features": {
     // Enables Docker-in-Docker (provides docker & docker compose)
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    "ghcr.io/devcontainers/features/docker-from-docker:1": {}
   },
   "forwardPorts": [8080],
   "customizations": {
