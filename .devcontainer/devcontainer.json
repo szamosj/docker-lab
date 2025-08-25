@@ -1,12 +1,25 @@
- {
-  "name": "Docker LAMP Lab",
-  "dockerFile": "Dockerfile",
+{
+  "name": "Docker & Networking Tools Lab",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    // Enables Docker-in-Docker (provides docker & docker compose)
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
   "forwardPorts": [8080],
   "customizations": {
     "vscode": {
+      "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+      },
       "extensions": [
-        "ms-azuretools.vscode-docker"
+        "ms-azuretools.vscode-docker",
+        "ms-vscode.vscode-typescript-next"
       ]
     }
-  }
+  },
+  "remoteUser": "vscode",
+  "postCreateCommand": "echo 'Container ready for Docker lab!'"
 }
+
