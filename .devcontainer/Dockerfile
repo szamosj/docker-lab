@@ -1,12 +1,8 @@
- {
-  "name": "Docker LAMP Lab",
-  "dockerFile": "Dockerfile",
-  "forwardPorts": [8080],
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "ms-azuretools.vscode-docker"
-      ]
-    }
-  }
-}
+# .devcontainer/Dockerfile
+FROM mcr.microsoft.com/devcontainers/base:ubuntu
+
+# Install basic tools
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    && rm -rf /var/lib/apt/lists/*
