@@ -71,6 +71,7 @@ $result = $conn->query($sql);
   </div>
 </nav>
     <div class="container">
+<p> Paul Erdős, a legendary and eccentric Hungarian mathematician once said: "A mathematician is a device for turning coffee into theorems"  </p> 
         <h1 class="mb-4">Users</h1>
         <table class="table table-striped">
             <thead>
