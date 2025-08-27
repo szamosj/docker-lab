@@ -11,10 +11,12 @@ services:
       - db
 
   db:
-    image: mariadb:10.11
+    build:
+      context: ./db
+      dockerfile: Dockerfile
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: testdb
       MYSQL_USER: labuser
       MYSQL_PASSWORD: labpass
