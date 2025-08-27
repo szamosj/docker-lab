@@ -21,29 +21,6 @@ This lab simulates a **production-like deployment** of a LAMP stack:
 
 ---
 
-## 🔧 Architecture Diagram
-
-🌐 Browser
-│ (HTTP Requests)
-▼
-🖥️ Web App (Apache + PHP)
-│ (queries via MySQLi)
-▼
-🗄️ Database (MariaDB)
-│ (stores & returns data)
-└─────────────┐
-│
-🖥️ Web App (renders data)
-│
-▼
-🌐 Browser (displays page)
-
-yaml
-Copy
-Edit
-
----
-
 ## 🚀 Getting Started
 
 These instructions assume you've **forked or cloned** this repo.
@@ -52,58 +29,3 @@ These instructions assume you've **forked or cloned** this repo.
 
 ```bash
 docker compose up -d --build
-up starts the containers.
-
--d runs them in detached mode.
-
---build rebuilds the images in case of changes.
-
-We should see both containers (web and db) start successfully.
-
-2️⃣ Verify the containers are running
-bash
-Copy
-Edit
-docker compose ps
-We should see two services:
-
-web → Apache + PHP
-
-db → MariaDB
-
-🌐 Accessing the Web Page
-Open your browser.
-
-Navigate to: http://localhost:8080
-
-We should see a Bootswatch-themed table populated from the MariaDB database.
-
-🗄️ Inspecting the Database
-To access the database container:
-
-bash
-Copy
-Edit
-docker compose exec db mariadb -u labuser -p
-# password: labpass
-Example query to view data:
-
-sql
-Copy
-Edit
-SELECT * FROM testdb.users;
-🛠️ Stopping the Lab
-When finished:
-
-bash
-Copy
-Edit
-docker compose down
-This stops and removes the containers, but database data remains in the Docker volume.
-
-✅ Notes
-All web files are served from the repo via the mounted volume.
-
-Any changes made in the web app directory will reflect immediately in the container.
-
-Docker allows this setup to be reproducible on any machine with Docker installed.
