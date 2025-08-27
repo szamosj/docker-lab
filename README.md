@@ -1,98 +1,84 @@
-Docker Lab
+🐳 Docker Lab
 
-This repository provides a simple, ready-to-run example of using Docker Compose to set up a basic web + database environment. It is designed for students learning the fundamentals of containerized environments and how applications can run using Docker.
+Welcome to the Docker Lab! 🎉
+In this lab, we will run a ready-to-use web + database environment using Docker. No complex setup required — just run a few commands and see your web app in action!
 
-What This Lab Demonstrates
+🚀 What We'll See
 
-How to start a multi-container application using Docker Compose
+Web app (Apache + PHP) running a simple page with a table of users
 
-How web applications (Apache/PHP) can interact with a database (MariaDB)
+Database (MariaDB) storing user data
 
-How to map ports, manage volumes, and automatically initialize a database
+Docker Compose managing everything so we don’t have to manually install or configure services
 
-How containerized applications can be started quickly without complex local setup
+Think of this as a tiny "production-like" setup: the web app talks to the database just like in a real deployment.
 
-Prerequisites
+📝 Prerequisites
 
-A GitHub Codespace (recommended) or local environment with Docker and Docker Compose installed.
+GitHub Codespace or local machine with Docker + Docker Compose installed
 
-Basic familiarity with the terminal.
+Basic terminal knowledge
 
-What's Inside
+📂 What’s in this Repo
 
-Web Service (Apache + PHP)
-Runs a simple PHP web application. Mapped to http://localhost:8080
-.
+docker-compose.yml → defines web and db services
 
-Database Service (MariaDB 10.11)
-Configured with:
+.devcontainer/Dockerfile → builds the web container
 
-Database: testdb
+db_setup.sql → initializes the database with sample data
 
-Username: labuser
+index.php → simple PHP page displaying the database table
 
-Password: labpass
+⚡ Quick Start (Demo Mode)
 
-Root password: rootpassword
-
-Docker Volumes
-Persistent storage for the MariaDB database.
-
-SQL Initialization Script (db_setup.sql)
-Automatically runs when the database container is first created.
-(If the database volume already exists, this script will not re-run unless the volume is removed.)
-
-Quick Start (Demo Mode)
-
-Clone this repository:
+Fork & Clone the Repo
 
 git clone https://github.com/YOUR-ORG/docker-lab.git
 cd docker-lab
 
 
-Start the environment:
+Start Everything
 
 docker compose up -d --build
 
 
-Access the web app:
+✅ This builds and starts the web + database containers
 
-Visit: http://localhost:8080
+Open the Web App
 
-Check database logs (optional):
+Click the port 8080 link in Codespaces, or visit:
+http://localhost:8080
+ 🌐
+
+Check Database (Optional)
 
 docker compose logs db
 
 
-Stop the environment:
+Stop the Environment
 
 docker compose down
 
-How Database Initialization Works
 
-The db service uses a custom MariaDB image that copies db_setup.sql into /docker-entrypoint-initdb.d/.
-This script runs only when the database is first created (fresh volume).
-
-To reset the database:
+Tip: If you want a fresh database, remove the database volume before starting again:
 
 docker compose down -v
 docker compose up -d --build
 
+🔑 Key Concepts in This Lab
 
-This removes the database volume (db_data) and starts fresh.
+Containers: Isolated environments for web and database
 
-Key Docker Concepts Demonstrated
+Volumes: Keep database data even if the container restarts
 
-Services: Defined in docker-compose.yml (web & db)
+Port Mapping: Access the web app through port 8080
 
-Volumes: Persistent storage for database data
+Environment Variables: Set database credentials easily
 
-Port Mapping: Host port 8080 → Container port 80
+🛠️ Next Steps
 
-Environment Variables: Used to set database credentials
+Use this lab to explore networking tools and performance troubleshooting in a follow-up lab
 
-Build Context: Custom web container built from .devcontainer/Dockerfile
+Experiment with editing index.php or adding new tables to the database
 
-Next Steps
 
-This repository will serve as the foundation for a follow-up lab focusing on networking concepts using Docker.
