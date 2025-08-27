@@ -1,4 +1,4 @@
-# 🐳 docker-lab - LAMP Stack Demo
+# 🐳 Docker Lab - LAMP Stack Demo
 
 Welcome to the **Docker Lab**! This demo shows how we can run a small web application using **Docker containers** for both the web server and the database.  
 
@@ -38,6 +38,10 @@ This lab simulates a **production-like deployment** of a LAMP stack:
 ▼
 🌐 Browser (displays page)
 
+yaml
+Copy
+Edit
+
 ---
 
 ## 🚀 Getting Started
@@ -57,7 +61,9 @@ up starts the containers.
 We should see both containers (web and db) start successfully.
 
 2️⃣ Verify the containers are running
-
+bash
+Copy
+Edit
 docker compose ps
 We should see two services:
 
@@ -75,18 +81,24 @@ We should see a Bootswatch-themed table populated from the MariaDB database.
 🗄️ Inspecting the Database
 To access the database container:
 
+bash
+Copy
+Edit
 docker compose exec db mariadb -u labuser -p
 # password: labpass
 Example query to view data:
 
+sql
+Copy
+Edit
 SELECT * FROM testdb.users;
-
 🛠️ Stopping the Lab
-
 When finished:
 
+bash
+Copy
+Edit
 docker compose down
-
 This stops and removes the containers, but database data remains in the Docker volume.
 
 ✅ Notes
