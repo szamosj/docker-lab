@@ -1,84 +1,97 @@
-🐳 Docker Lab
+# 🐳 docker-lab - LAMP Stack Demo
 
-Welcome to the Docker Lab! 🎉
-In this lab, we will run a ready-to-use web + database environment using Docker. No complex setup required — just run a few commands and see your web app in action!
+Welcome to the **Docker Lab**! This demo shows how we can run a small web application using **Docker containers** for both the web server and the database.  
 
-🚀 What We'll See
+---
 
-Web app (Apache + PHP) running a simple page with a table of users
+## 🗂️ Overview
 
-Database (MariaDB) storing user data
+This lab simulates a **production-like deployment** of a LAMP stack:
 
-Docker Compose managing everything so we don’t have to manually install or configure services
+- 🖥️ **Web App:** Apache + PHP
+- 🗄️ **Database:** MariaDB
+- 🌐 **Browser:** Interface for viewing the web page
 
-Think of this as a tiny "production-like" setup: the web app talks to the database just like in a real deployment.
+**Key Points:**
 
-📝 Prerequisites
+- Containers isolate the application and database for easy setup.
+- Persistent volumes keep database data even if containers are restarted.
+- Using Docker means no complicated symlinks or manual server setup.
+- We can easily reset or reproduce the environment on any computer with Docker.
 
-GitHub Codespace or local machine with Docker + Docker Compose installed
+---
 
-Basic terminal knowledge
+## 🔧 Architecture Diagram
 
-📂 What’s in this Repo
+🌐 Browser
+│ (HTTP Requests)
+▼
+🖥️ Web App (Apache + PHP)
+│ (queries via MySQLi)
+▼
+🗄️ Database (MariaDB)
+│ (stores & returns data)
+└─────────────┐
+│
+🖥️ Web App (renders data)
+│
+▼
+🌐 Browser (displays page)
 
-docker-compose.yml → defines web and db services
+---
 
-.devcontainer/Dockerfile → builds the web container
+## 🚀 Getting Started
 
-db_setup.sql → initializes the database with sample data
+These instructions assume you've **forked or cloned** this repo.
 
-index.php → simple PHP page displaying the database table
+### 1️⃣ Build and start the containers
 
-⚡ Quick Start (Demo Mode)
-
-Fork & Clone the Repo
-
-git clone https://github.com/YOUR-ORG/docker-lab.git
-cd docker-lab
-
-
-Start Everything
-
+```bash
 docker compose up -d --build
+up starts the containers.
 
+-d runs them in detached mode.
 
-✅ This builds and starts the web + database containers
+--build rebuilds the images in case of changes.
 
-Open the Web App
+We should see both containers (web and db) start successfully.
 
-Click the port 8080 link in Codespaces, or visit:
-http://localhost:8080
- 🌐
+2️⃣ Verify the containers are running
 
-Check Database (Optional)
+docker compose ps
+We should see two services:
 
-docker compose logs db
+web → Apache + PHP
 
+db → MariaDB
 
-Stop the Environment
+🌐 Accessing the Web Page
+Open your browser.
+
+Navigate to: http://localhost:8080
+
+We should see a Bootswatch-themed table populated from the MariaDB database.
+
+🗄️ Inspecting the Database
+To access the database container:
+
+docker compose exec db mariadb -u labuser -p
+# password: labpass
+Example query to view data:
+
+SELECT * FROM testdb.users;
+
+🛠️ Stopping the Lab
+
+When finished:
 
 docker compose down
 
+This stops and removes the containers, but database data remains in the Docker volume.
 
-Tip: If you want a fresh database, remove the database volume before starting again:
+✅ Notes
+All web files are served from the repo via the mounted volume.
 
-docker compose down -v
-docker compose up -d --build
+Any changes made in the web app directory will reflect immediately in the container.
 
-🔑 Key Concepts in This Lab
-
-Containers: Isolated environments for web and database
-
-Volumes: Keep database data even if the container restarts
-
-Port Mapping: Access the web app through port 8080
-
-Environment Variables: Set database credentials easily
-
-🛠️ Next Steps
-
-Use this lab to explore networking tools and performance troubleshooting in a follow-up lab
-
-Experiment with editing index.php or adding new tables to the database
-
-
+Docker allows this setup to be reproducible on any machine with Docker installed.
